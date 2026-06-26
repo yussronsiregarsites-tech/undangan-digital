@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ====== STYLE SAMA SEPERTI SEBELUMNYA ====== */
+        /* ====== STYLE ====== */
         h1,
         h2 {
             font-family: 'Great Vibes', cursive;
@@ -1680,6 +1680,7 @@
             });
 
             // ===== CONFIGURATION =====
+            // ⚠️ GANTI URL INI DENGAN URL WEB APP ANDA YANG SUDAH DI-DEPLOY
             var GOOGLE_API_URL =
                 "https://script.google.com/macros/s/AKfycbxzIY4IsOHLTwUt0HWC6tZamrqgBpap9FCX98BUFvadpbjmBefE0A1y3saEB_n5-VSh/exec";
             var GALLERY_COUNT = 6;
@@ -1940,9 +1941,12 @@
                         base64Data: base64
                     };
 
+                    // ⭐ HEADER DIUBAH MENJADI application/x-www-form-urlencoded
                     fetch(GOOGLE_API_URL, {
                             method: 'POST',
-                            headers: { 'Content-Type': 'text/plain' },
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
                             body: JSON.stringify(payload)
                         })
                         .then(function(res) { return res.json(); })
@@ -1951,7 +1955,6 @@
                                 var field = $(pendingUploadField);
                                 if (field) {
                                     field.value = result.link;
-                                    // Update preview
                                     updatePreview(pendingUploadPreviewId, result.link);
                                     showToast('Upload berhasil! Link tersimpan.', 'success');
                                 }
@@ -2455,9 +2458,12 @@
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+                    // ⭐ HEADER DIUBAH MENJADI application/x-www-form-urlencoded
                     var res = await fetch(GOOGLE_API_URL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'text/plain' },
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
                         body: JSON.stringify(payload),
                         signal: controller.signal
                     });
@@ -2593,9 +2599,12 @@
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
+                // ⭐ HEADER DIUBAH MENJADI application/x-www-form-urlencoded
                 fetch(GOOGLE_API_URL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'text/plain' },
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
                         body: JSON.stringify(payload),
                         signal: controller.signal
                     })
