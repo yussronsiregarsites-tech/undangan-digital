@@ -1,26 +1,32 @@
 {
   "name": "Undangan Pernikahan Fatrus & Luvinta",
-  "short_name": "Undangan",
+  "short_name": "Undangan F&L",
   "description": "Undangan Digital Pernikahan Ahmad Fatrussulukhi & Luvinta Citra Fitria",
-  "start_url": "/index.html",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fdf9f6",
   "theme_color": "#8b703a",
-  "lang": "id",
-  "categories": ["lifestyle"],
+  "lang": "id-ID",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
