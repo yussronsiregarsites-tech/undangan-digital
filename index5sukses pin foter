@@ -611,7 +611,7 @@
             <div class="line"></div>
         </div>
 
-        <footer class="box-container py-20 px-4 text-center relative overflow-hidden section-reveal">
+                <footer class="box-container py-20 px-4 text-center relative overflow-hidden section-reveal">
             <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKR2.webp" class="ornament ornament-tl opacity-40 parallax-layer" data-parallax-speed="0.1" alt="" loading="lazy">
             <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKN2.webp" class="ornament ornament-tr opacity-40 parallax-layer" data-parallax-speed="-0.1" alt="" loading="lazy">
 
@@ -630,13 +630,28 @@
 
                 <h1 class="text-5xl sm:text-6xl text-gold mb-3" data-aos="reveal-up"><span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></h1>
                 <p class="text-xs text-gray-400 mt-8">Made with <span class="text-red-400 px-0.5 text-base select-none">❤️</span> for <span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></p>
+                
+                <!-- ✅ SECTION PROMOSI WHATSAPP -->
+                <div class="mt-8 pt-6 border-t border-gold-pale/30" data-aos="reveal-up" data-aos-delay="200">
+                    <p class="text-[11px] text-gray-500 mb-3 font-medium">Butuh Undangan Digital Seperti Ini?</p>
+                    <a href="https://wa.me/6282255502226?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20undangan%20digital" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105 shadow-lg hover:shadow-xl">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Hubungi via WhatsApp</span>
+                    </a>
+                    <p class="text-[10px] text-gray-400 mt-3">
+                        <i class="fa-solid fa-phone text-xs mr-1"></i>
+                        0822-5550-2226
+                    </p>
+                </div>
             </div>
 
             <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKR.webp" class="ornament ornament-bl opacity-40 parallax-layer" data-parallax-speed="0.1" alt="" loading="lazy">
             <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKN2.webp" class="ornament ornament-br opacity-40 parallax-layer" data-parallax-speed="-0.1" alt="" loading="lazy">
             <div class="h-[60px]"></div>
         </footer>
-    </main>
 
     <nav class="fix-menu" id="bottom-nav">
         <a href="#home" title="Home" data-section="home"><i class="fa-solid fa-house"></i></a>
