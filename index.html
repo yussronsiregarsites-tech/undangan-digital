@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Undangan Fatrus & Luvinta</title>
 
+    <!-- Favicon untuk hilangkan warning 404 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Engagement&family=Poppins:wght@300;400;500;600;700&family=Golos+Text:wght@400;600;700&display=swap" rel="stylesheet">
@@ -977,7 +980,7 @@
                 if (statusEl) statusEl.textContent = 'Menghubungi server...';
                 
                 try {
-                    // PENGAMBILAN DATA (GET) MENGHINDARI CORS PREFLIGHT
+                    // ✅ GET tanpa header - simple request, tidak trigger preflight
                     const response = await fetch(GOOGLE_API_URL);
                     if (!response.ok) throw new Error('HTTP ' + response.status);
                     const data = await response.json();
@@ -1005,6 +1008,12 @@
                 var file = e.target.files[0];
                 if (!file || !pendingUploadField) return;
 
+                // Validasi ukuran (max 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    showToast('Ukuran file terlalu besar (maks 2MB)', 'error');
+                    return;
+                }
+
                 showToast('Mengupload ' + file.name + ' ...', 'info');
 
                 var reader = new FileReader();
@@ -1017,7 +1026,7 @@
                         base64Data: base64
                     };
 
-                    // ⭐ FETCH TANPA HEADER CONTENT-TYPE (MENGHINDARI PREFLIGHT)
+                    // ✅ FETCH TANPA HEADER - simple request, tidak trigger preflight CORS
                     fetch(GOOGLE_API_URL, {
                         method: 'POST',
                         body: JSON.stringify(payload)
@@ -1449,12 +1458,10 @@
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-                    // ⭐ HEADER DIUBAH MENJADI application/x-www-form-urlencoded
+                    
+                    // ✅ FETCH TANPA HEADER - simple request, tidak trigger preflight CORS
                     var res = await fetch(GOOGLE_API_URL, {
                         method: 'POST',
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
                         body: JSON.stringify(payload),
                         signal: controller.signal
                     });
@@ -1590,12 +1597,9 @@
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
-                // ⭐ HEADER DIUBAH MENJADI application/x-www-form-urlencoded
+                // ✅ FETCH TANPA HEADER - simple request, tidak trigger preflight CORS
                 fetch(GOOGLE_API_URL, {
                         method: 'POST',
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
                         body: JSON.stringify(payload),
                         signal: controller.signal
                     })
