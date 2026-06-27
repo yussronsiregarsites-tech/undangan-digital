@@ -1,95 +1,46 @@
-const CACHE_NAME = 'undangan-v1.0';
-const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json'
-];
+const CACHE_NAME = 'undangan-v2.0';
+const ASSETS = ['./', './index.html', './manifest.json'];
 
-// Install - Cache assets
-self.addEventListener('install', event => {
+self.addEventListener('install', e => {
   console.log('[SW] Installing...');
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS_TO_CACHE).catch(err => {
-        console.warn('[SW] Cache failed:', err);
-      });
-    })
-  );
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)).catch(err => console.warn(err)));
   self.skipWaiting();
 });
 
-// Activate - Clean old caches
-self.addEventListener('activate', event => {
+self.addEventListener('activate', e => {
   console.log('[SW] Activating...');
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('[SW] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.map(k => k !== CACHE_NAME && caches.delete(k)))));
   self.clients.claim();
 });
 
-// Fetch - Cache-first untuk assets, Network-first untuk API
-self.addEventListener('fetch', event => {
-  const url = event.request.url;
+self.addEventListener('fetch', e => {
+  const url = e.request.url;
   
-  // API calls - Network first
+  // API - Network first
   if (url.includes('script.google.com')) {
-    event.respondWith(
-      fetch(event.request, { mode: 'cors' })
-        .then(response => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-  
-  // CDN resources - Cache first
-  if (url.includes('cdn.tailwindcss.com') || 
-      url.includes('unpkg.com') || 
-      url.includes('cdnjs.cloudflare.com') ||
-      url.includes('fonts.googleapis.com') ||
-      url.includes('fonts.gstatic.com')) {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request).then(fetchResponse => {
-          if (fetchResponse && fetchResponse.status === 200) {
-            const clone = fetchResponse.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return fetchResponse;
-        });
-      })
-    );
-    return;
-  }
-  
-  // Static assets - Cache first
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).then(fetchResponse => {
-        if (fetchResponse && fetchResponse.status === 200 && fetchResponse.type === 'basic') {
-          const clone = fetchResponse.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+    e.respondWith(
+      fetch(e.request).then(r => {
+        if (r && r.status === 200) {
+          const clone = r.clone();
+          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
         }
-        return fetchResponse;
+        return r;
+      }).catch(() => caches.match(e.request))
+    );
+    return;
+  }
+  
+  // CDN & Assets - Cache first
+  e.respondWith(
+    caches.match(e.request).then(r => {
+      return r || fetch(e.request).then(resp => {
+        if (resp && resp.status === 200 && resp.type === 'basic') {
+          const clone = resp.clone();
+          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+        }
+        return resp;
       }).catch(() => {
-        // Fallback untuk navigasi
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
+        if (e.request.mode === 'navigate') return caches.match('./index.html');
       });
     })
   );
