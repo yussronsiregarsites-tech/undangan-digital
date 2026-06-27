@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">Undangan Fatrus & Luvinta</title>
 
-<!-- ✅ PWA META TAGS (DIPERBAIKI - RELATIVE PATH) -->
+<!-- ✅ PWA META TAGS -->
 <meta name="theme-color" content="#8b703a">
 <meta name="description" content="Undangan Pernikahan Ahmad Fatrussulukhi & Luvinta Citra Fitria">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,7 +15,7 @@
 <meta name="application-name" content="Undangan F&L">
 <meta name="msapplication-TileColor" content="#8b703a">
 
-<!-- Manifest dengan relative path -->
+<!-- ✅ RELATIVE PATH - PENTING! -->
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
@@ -31,7 +31,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ====== STYLE ====== */
 h1, h2 { font-family: 'Great Vibes', cursive; }
 h3, .font-engage { font-family: 'Engagement', cursive; }
 p, .font-p, body, input, textarea, select, button, label { font-family: "Poppins", sans-serif; }
@@ -250,7 +249,11 @@ body { background-color: #8b703a; color: #2a2a2a; overflow-x: hidden; }
     font-weight: 600;
 }
 #pwa-install-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(139, 112, 58, 0.6); }
-#pwa-install-btn.show { display: flex; }
+#pwa-install-btn.show { display: flex; animation: pulseInstall 2s ease-in-out infinite; }
+@keyframes pulseInstall {
+    0%, 100% { box-shadow: 0 4px 15px rgba(139, 112, 58, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(203, 166, 87, 0.8), 0 0 0 8px rgba(203, 166, 87, 0.2); }
+}
 #pwa-install-btn .pwa-text { display: inline; }
 #pwa-install-btn .pwa-icon-only { display: none; }
 @media (max-width: 640px) {
@@ -289,6 +292,9 @@ body.pwa-installed #ios-install-hint { display: none !important; }
     color: var(--gold); font-size: 14px;
 }
 #admin-trigger:hover { opacity: 0.8; background: rgba(139, 112, 58, 0.2); }
+
+/* ✅ FOOTER TAP AREA (untuk gesture admin) */
+#footer-tap-area { cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
 </style>
 </head>
 <body>
@@ -305,11 +311,11 @@ body.pwa-installed #ios-install-hint { display: none !important; }
 
 <audio id="bg-music" loop preload="auto"></audio>
 
-<!-- ✅ PWA INSTALL BUTTON (DIPERBAIKI - RESPONSIVE) -->
+<!-- ✅ PWA INSTALL BUTTON (DIPERBAIKI) -->
 <button id="pwa-install-btn" onclick="installPWA()" title="Install Aplikasi">
     <i class="fa-solid fa-download pwa-icon-only"></i>
     <i class="fa-solid fa-download" style="margin-right:4px;"></i>
-    <span class="pwa-text">Install</span>
+    <span class="pwa-text">Install App</span>
 </button>
 
 <!-- ✅ iOS INSTALL INSTRUCTION -->
@@ -383,11 +389,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section class="box-container py-20 px-6 text-center relative z-10 section-reveal">
         <div class="max-w-2xl mx-auto">
@@ -397,23 +399,17 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Assalamu'alaikum</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <p class="text-gold-light mb-6 text-base split-text" data-aos="reveal-up" data-aos-delay="100" style="font-family:'Golos Text',sans-serif;">السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
             <h1 class="text-3xl sm:text-4xl text-gold mb-8 leading-tight" data-aos="reveal-up" data-aos-delay="200">The Wedding of <br><span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></h1>
             <p class="text-gray-600 text-sm max-w-md mx-auto leading-relaxed" data-aos="reveal-up" data-aos-delay="300">Atas Rahmat Tuhan Yang Maha Esa, kami bermaksud mengundang Anda di acara pernikahan kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="couple" class="box-container py-20 px-4 text-center relative section-reveal">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKR1.webp" class="ornament ornament-tl parallax-layer" data-parallax-speed="0.15" alt="" loading="lazy">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKN1.webp" class="ornament ornament-tr parallax-layer" data-parallax-speed="-0.15" alt="" loading="lazy">
-
         <div class="max-w-4xl mx-auto">
             <div class="section-header" data-aos="reveal-down" data-aos-duration="900">
                 <div class="section-number">Chapter 02</div>
@@ -421,7 +417,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Mempelai</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 mt-10">
                 <div class="box-pengantin shadow-custom w-full md:w-5/12" data-aos="reveal-left" data-aos-duration="1000">
                     <div class="relative w-36 h-36 mx-auto mb-5" data-aos="glow-in" data-aos-delay="300">
@@ -432,9 +427,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                     <div class="text-sm text-gray-500 leading-relaxed mb-5"><p>Putra dari</p><p id="val-pria-ortu" class="font-semibold text-gray-700 mt-1">Ortu Pria</p></div>
                     <a id="val-pria-ig-link" href="#" target="_blank" class="inline-flex items-center gap-2 bg-gold text-white px-5 py-2 rounded-full text-xs hover:shadow-lg transition"><i class="fab fa-instagram text-base"></i> <span id="val-pria-ig"></span></a>
                 </div>
-
                 <div class="text-6xl text-gold font-engage my-2 md:my-0" data-aos="zoom-rotate" data-aos-delay="200">&</div>
-
                 <div class="box-pengantin shadow-custom w-full md:w-5/12" data-aos="reveal-right" data-aos-duration="1000">
                     <div class="relative w-36 h-36 mx-auto mb-5" data-aos="glow-in" data-aos-delay="300">
                         <img id="val-fotoWanita" src="" class="w-full h-full rounded-full border-4 border-gold object-cover shadow-md" alt="Bride" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -448,11 +441,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="story" class="box-container py-20 px-4 relative section-reveal">
         <div class="max-w-2xl mx-auto">
@@ -462,16 +451,13 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Love Story</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="bg-white rounded-2xl shadow-custom p-8 mb-0 hover:-translate-y-1 transition duration-300 border border-gray-100" data-aos="clip-up" data-aos-duration="1000">
                 <img id="val-story1-img" src="" class="w-full max-w-sm mx-auto rounded-xl mb-6 shadow-sm object-cover aspect-[4/3]" alt="Story 1" loading="lazy" onerror="this.style.display='none';">
                 <div class="inline-block bg-gold text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider">CHAPTER ONE</div>
                 <h3 id="val-story1-title" class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 font-sans">Story 1</h3>
                 <p id="val-story1-desc" class="text-sm text-gray-500 leading-relaxed">Desc 1</p>
             </div>
-
             <div class="story-connector" data-aos="reveal-up" data-aos-duration="800"></div>
-
             <div class="bg-white rounded-2xl shadow-custom p-8 hover:-translate-y-1 transition duration-300 border border-gray-100" data-aos="clip-up" data-aos-duration="1000" data-aos-delay="150">
                 <img id="val-story2-img" src="" class="w-full max-w-sm mx-auto rounded-xl mb-6 shadow-sm object-cover aspect-[4/3]" alt="Story 2" loading="lazy" onerror="this.style.display='none';">
                 <div class="inline-block bg-gold text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wider">CHAPTER TWO</div>
@@ -481,16 +467,11 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="event" class="box-container py-20 px-4 relative section-reveal">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKR2.webp" class="ornament ornament-tl parallax-layer" data-parallax-speed="0.15" alt="" loading="lazy">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKN2.webp" class="ornament ornament-tr parallax-layer" data-parallax-speed="-0.15" alt="" loading="lazy">
-
         <div class="max-w-lg mx-auto text-center relative z-10">
             <div class="section-header" data-aos="reveal-down" data-aos-duration="900">
                 <div class="section-number">Chapter 04</div>
@@ -498,7 +479,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Save The Date</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="event-card shadow-custom" data-aos="reveal-up" data-aos-duration="900" data-aos-delay="0">
                 <div class="event-icon" data-aos="glow-in" data-aos-delay="200"><i class="fa-solid fa-champagne-glasses"></i></div>
                 <h1 class="text-3xl sm:text-4xl text-gold mb-5">Resepsi Pernikahan</h1>
@@ -508,7 +488,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <a id="val-resepsi-map" href="#" target="_blank" class="inline-flex items-center gap-2 border-2 border-gold text-gold px-6 py-2.5 rounded-full hover:bg-gold hover:text-white transition font-semibold text-sm"><i class="fa-solid fa-map-location-dot"></i> Maps Lokasi</a>
             </div>
             <div class="event-connector" data-aos="reveal-up" data-aos-duration="500" data-aos-delay="100"><span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></div>
-
             <div class="event-card shadow-custom" data-aos="reveal-up" data-aos-duration="900" data-aos-delay="200">
                 <div class="event-icon" data-aos="glow-in" data-aos-delay="200"><i class="fa-solid fa-ring"></i></div>
                 <h1 class="text-3xl sm:text-4xl text-gold mb-5">Akad Pernikahan</h1>
@@ -518,7 +497,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <a id="val-akad-map" href="#" target="_blank" class="inline-flex items-center gap-2 border-2 border-gold text-gold px-6 py-2.5 rounded-full hover:bg-gold hover:text-white transition font-semibold text-sm"><i class="fa-solid fa-map-location-dot"></i> Maps Lokasi</a>
             </div>
             <div class="event-connector" data-aos="reveal-up" data-aos-duration="500" data-aos-delay="300"><span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></div>
-
             <div class="bg-white p-10 pt-16 shadow-custom text-center event-card-bottom border border-gray-100" data-aos="reveal-up" data-aos-duration="900" data-aos-delay="400">
                 <div class="event-icon" data-aos="glow-in" data-aos-delay="200"><i class="fa-solid fa-utensils"></i></div>
                 <h1 class="text-3xl sm:text-4xl text-gold mb-5">Jamuan Tamu</h1>
@@ -527,20 +505,14 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <div class="flex items-start justify-center gap-2 text-gray-600 mb-6"><i class="fa-solid fa-location-dot text-sm text-gold-light mt-1"></i><p id="val-dinner-lokasi" class="text-sm font-medium leading-snug">Lokasi Dinner</p></div>
                 <a id="val-dinner-map" href="#" target="_blank" class="inline-flex items-center gap-2 border-2 border-gold text-gold px-6 py-2.5 rounded-full hover:bg-gold hover:text-white transition font-semibold text-sm"><i class="fa-solid fa-map-location-dot"></i> Maps Lokasi</a>
             </div>
-
             <p class="text-gray-500 text-sm mt-12 mb-10 leading-relaxed" data-aos="reveal-up" data-aos-duration="700" data-aos-delay="500">Besar harapan kami apabila Bapak/Ibu/Sahabat/Saudara/i berkenan hadir pada acara ini. Atas perhatiannya, kami ucapkan terima kasih.</p>
-
             <div class="rounded-2xl overflow-hidden shadow-custom mb-10 border border-gray-100" data-aos="clip-up" data-aos-duration="800" data-aos-delay="600">
                 <iframe id="val-map-iframe" src="" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="gift" class="box-container py-20 px-4 text-center section-reveal">
         <div class="max-w-md mx-auto">
@@ -550,20 +522,14 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Titip Hadiah</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="event-icon" data-aos="glow-in"><i class="fa-solid fa-gift"></i></div>
             <p class="text-sm text-gray-500 mb-10 leading-relaxed" data-aos="reveal-up" data-aos-delay="100">Doa restu Bapak/Ibu sekalian merupakan karunia yang sangat berarti bagi kami. Dan jika memberi merupakan ungkapan tanda kasih, Bapak/Ibu dapat memberi kado secara cashless.</p>
-
             <div id="bank-list-container" class="flex flex-col gap-4"></div>
             <div id="bank-empty-msg" class="text-sm text-gray-400 italic py-4 hidden" data-aos="reveal-up">Belum ada rekening yang tersedia.</div>
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="rsvp" class="box-container py-20 px-4 relative section-reveal">
         <div class="max-w-xl mx-auto relative z-10">
@@ -573,7 +539,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Buku Tamu</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="bg-white p-8 sm:p-10 rounded-2xl shadow-custom border border-gray-100" data-aos="reveal-up" data-aos-duration="1000">
                 <div class="event-icon" data-aos="glow-in" data-aos-delay="100"><i class="fa-solid fa-book-open"></i></div>
                 <p class="text-center text-gray-400 text-xs mb-8">Berikan ucapan & konfirmasi kehadiran Anda</p>
@@ -594,11 +559,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <section id="gallery" class="box-container py-20 px-4 text-center section-reveal">
         <div class="max-w-4xl mx-auto">
@@ -608,9 +569,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Gallery</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <p class="text-gray-400 text-sm mb-10" data-aos="reveal-up">Momen-momen indah bersama</p>
-
             <div id="video-section-wrapper" class="relative w-full overflow-hidden rounded-2xl shadow-lg mb-10 border border-gray-100" style="padding-top: 56.25%;" data-aos="clip-up" data-aos-duration="1000">
                 <iframe id="val-videoYoutubeUrl" class="absolute top-0 left-0 w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
@@ -618,16 +577,11 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         </div>
     </section>
 
-    <div class="section-divider box-container">
-        <div class="line"></div>
-        <div class="diamond" data-aos="zoom-rotate"></div>
-        <div class="line"></div>
-    </div>
+    <div class="section-divider box-container"><div class="line"></div><div class="diamond" data-aos="zoom-rotate"></div><div class="line"></div></div>
 
     <footer class="box-container py-20 px-4 text-center relative overflow-hidden section-reveal">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKR2.webp" class="ornament ornament-tl opacity-40 parallax-layer" data-parallax-speed="0.1" alt="" loading="lazy">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-AKN2.webp" class="ornament ornament-tr opacity-40 parallax-layer" data-parallax-speed="-0.1" alt="" loading="lazy">
-
         <div class="relative z-10 max-w-lg mx-auto">
             <div class="section-header" data-aos="reveal-down" data-aos-duration="900">
                 <div class="section-number">The End</div>
@@ -635,14 +589,14 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 <h2 class="section-title">Terima Kasih</h2>
                 <div class="section-title-line"></div>
             </div>
-
             <div class="relative w-[180px] h-[180px] mx-auto mb-8" data-aos="zoom-rotate" data-aos-duration="1200">
                 <div id="val-fotoSampul3" class="circle-img-wrapper absolute inset-0 m-auto" style="width:150px;height:150px;"></div>
                 <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-Border.webp" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[230px] max-w-none pointer-events-none" alt="Frame" loading="lazy">
             </div>
-
             <h1 class="text-5xl sm:text-6xl text-gold mb-3" data-aos="reveal-up"><span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></h1>
-            <p class="text-xs text-gray-400 mt-8">Made with <span class="text-red-400 px-0.5 text-base select-none">❤️</span> for <span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></p>
+            
+            <!-- ✅ FOOTER TAP AREA - GESTURE RAHASIA ADMIN (5x tap) -->
+            <p id="footer-tap-area" class="text-xs text-gray-400 mt-8">Made with <span class="text-red-400 px-0.5 text-base select-none">❤️</span> for <span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></p>
 
             <!-- ✅ SECTION PROMOSI WHATSAPP -->
             <div class="mt-8 pt-6 border-t" style="border-color: rgba(203, 166, 87, 0.2);" data-aos="reveal-up" data-aos-delay="200">
@@ -660,7 +614,6 @@ body.pwa-installed #ios-install-hint { display: none !important; }
                 </p>
             </div>
         </div>
-
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKR.webp" class="ornament ornament-bl opacity-40 parallax-layer" data-parallax-speed="0.1" alt="" loading="lazy">
         <img src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKN2.webp" class="ornament ornament-br opacity-40 parallax-layer" data-parallax-speed="-0.1" alt="" loading="lazy">
         <div class="h-[60px]"></div>
@@ -688,7 +641,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
 <div id="pin-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999999] flex items-center justify-center opacity-0 pointer-events-none px-4">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform scale-95" id="pin-modal-content">
         <div class="p-6 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold flex items-center justify-content-center" style="background: linear-gradient(135deg, var(--gold-mid), var(--gold));">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--gold-mid), var(--gold));">
                 <i class="fa-solid fa-lock text-white text-2xl"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Verifikasi Admin</h3>
@@ -956,6 +909,30 @@ body.pwa-installed #ios-install-hint { display: none !important; }
 
     var $ = function(id) { return document.getElementById(id); };
     var $$ = function(sel) { return document.querySelectorAll(sel); };
+
+    // ✅ NORMALIZE DATE - PERBAIKAN FORMAT DATE
+    function normalizeDateForInput(dateStr) {
+        if (!dateStr) return '';
+        // Jika sudah format yyyy-MM-dd, return langsung
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+        // Jika format ISO (2026-07-19T17:00:00.000Z), ambil tanggal saja
+        if (dateStr.indexOf('T') !== -1) {
+            try {
+                var dt = new Date(dateStr);
+                if (!isNaN(dt.getTime())) {
+                    return dt.toISOString().split('T')[0];
+                }
+            } catch(e) {}
+        }
+        // Coba parse berbagai format
+        try {
+            var dt = new Date(dateStr);
+            if (!isNaN(dt.getTime())) {
+                return dt.toISOString().split('T')[0];
+            }
+        } catch(e) {}
+        return dateStr;
+    }
 
     function smoothScrollTo(targetY, duration) {
         duration = duration || 1000;
@@ -1358,8 +1335,15 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         populateSettingsForm(data);
     }
     function populateSettingsForm(data) {
-        var fields = ['priaNick', 'priaFull', 'priaOrtu', 'priaIg', 'wanitaNick', 'wanitaFull', 'wanitaOrtu', 'wanitaIg', 'fotoSampul', 'fotoPria', 'fotoWanita', 'countdownTarget', 'musicUrl', 'akadDate', 'akadTime', 'akadLokasi', 'akadMapUrl', 'resepsiDate', 'resepsiTime', 'resepsiLokasi', 'resepsiMapUrl', 'dinnerDate', 'dinnerTime', 'dinnerLokasi', 'dinnerMapUrl', 'mapIframeUrl', 'story1Title', 'story1Desc', 'story1Img', 'story2Title', 'story2Desc', 'story2Img', 'videoYoutubeUrl'];
+        var fields = ['priaNick', 'priaFull', 'priaOrtu', 'priaIg', 'wanitaNick', 'wanitaFull', 'wanitaOrtu', 'wanitaIg', 'fotoSampul', 'fotoPria', 'fotoWanita', 'musicUrl', 'akadDate', 'akadTime', 'akadLokasi', 'akadMapUrl', 'resepsiDate', 'resepsiTime', 'resepsiLokasi', 'resepsiMapUrl', 'dinnerDate', 'dinnerTime', 'dinnerLokasi', 'dinnerMapUrl', 'mapIframeUrl', 'story1Title', 'story1Desc', 'story1Img', 'story2Title', 'story2Desc', 'story2Img', 'videoYoutubeUrl'];
         fields.forEach(function(f) { var el = $('set-' + f); if (el && data[f] !== undefined) el.value = data[f]; });
+        
+        // ✅ PERBAIKAN: Normalize countdownTarget sebelum set ke input date
+        var countdownEl = $('set-countdownTarget');
+        if (countdownEl && data.countdownTarget !== undefined) {
+            countdownEl.value = normalizeDateForInput(data.countdownTarget);
+        }
+        
         for (var i = 1; i <= GALLERY_COUNT; i++) { var el = $('set-galeri' + i); if (el && data['galeri' + i]) el.value = data['galeri' + i]; }
         var showVideoEl = $('set-showVideo');
         if (showVideoEl) showVideoEl.checked = data.showVideo !== false;
@@ -1542,9 +1526,16 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         }
         var btn = $('btn-save-settings'), statusEl = $('save-status');
         btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Menyimpan...';
-        var fields = ['priaNick', 'priaFull', 'priaOrtu', 'priaIg', 'wanitaNick', 'wanitaFull', 'wanitaOrtu', 'wanitaIg', 'fotoSampul', 'fotoPria', 'fotoWanita', 'countdownTarget', 'musicUrl', 'akadDate', 'akadTime', 'akadLokasi', 'akadMapUrl', 'resepsiDate', 'resepsiTime', 'resepsiLokasi', 'resepsiMapUrl', 'dinnerDate', 'dinnerTime', 'dinnerLokasi', 'dinnerMapUrl', 'mapIframeUrl', 'story1Title', 'story1Desc', 'story1Img', 'story2Title', 'story2Desc', 'story2Img', 'videoYoutubeUrl'];
+        var fields = ['priaNick', 'priaFull', 'priaOrtu', 'priaIg', 'wanitaNick', 'wanitaFull', 'wanitaOrtu', 'wanitaIg', 'fotoSampul', 'fotoPria', 'fotoWanita', 'musicUrl', 'akadDate', 'akadTime', 'akadLokasi', 'akadMapUrl', 'resepsiDate', 'resepsiTime', 'resepsiLokasi', 'resepsiMapUrl', 'dinnerDate', 'dinnerTime', 'dinnerLokasi', 'dinnerMapUrl', 'mapIframeUrl', 'story1Title', 'story1Desc', 'story1Img', 'story2Title', 'story2Desc', 'story2Img', 'videoYoutubeUrl'];
         var payload = { action: "settings", adminPin: ADMIN_PIN };
         fields.forEach(function(f) { var el = $('set-' + f); if (el && el.value) payload[f] = el.value; });
+        
+        // ✅ PERBAIKAN: Normalize countdownTarget sebelum simpan
+        var countdownEl = $('set-countdownTarget');
+        if (countdownEl && countdownEl.value) {
+            payload.countdownTarget = normalizeDateForInput(countdownEl.value);
+        }
+        
         for (var i = 1; i <= GALLERY_COUNT; i++) { var el = $('set-galeri' + i); if (el && el.value) payload['galeri' + i] = el.value; }
         var showVideoEl = $('set-showVideo');
         payload.showVideo = showVideoEl ? showVideoEl.checked : true;
@@ -1606,7 +1597,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         }
     }
 
-    // ✅ PWA INSTALL (DIPERBAIKI LENGKAP)
+    // ✅ PWA INSTALL (DIPERBAIKI)
     window.addEventListener('beforeinstallprompt', function(e) {
         console.log('[PWA] ✅ beforeinstallprompt triggered');
         e.preventDefault();
@@ -1646,7 +1637,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
 
     window.installPWA = function() {
         if (isStandalone) {
-            showToast('Aplikasi sudah terinstall! ', 'info');
+            showToast('Aplikasi sudah terinstall! 📱', 'info');
             return;
         }
         if (deferredPrompt) {
@@ -1669,7 +1660,25 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         }
     };
 
-    // ✅ KEYBOARD SHORTCUT: Ctrl+Shift+A untuk admin
+    // ✅ GESTURE RAHASIA: Tap 5x di footer untuk buka admin (untuk HP)
+    (function() {
+        var tapArea = $('footer-tap-area');
+        if (!tapArea) return;
+        var tapCount = 0;
+        var tapTimer = null;
+        tapArea.addEventListener('click', function(e) {
+            tapCount++;
+            if (tapTimer) clearTimeout(tapTimer);
+            tapTimer = setTimeout(function() { tapCount = 0; }, 1500);
+            if (tapCount >= 5) {
+                tapCount = 0;
+                console.log('[Admin] ✅ Gesture 5x tap detected');
+                openPinModal();
+            }
+        });
+    })();
+
+    // ✅ KEYBOARD SHORTCUT: Ctrl+Shift+A untuk admin (desktop)
     document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.shiftKey && e.key === 'A') {
             e.preventDefault();
@@ -1683,9 +1692,13 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         if ($('nama-tamu')) $('nama-tamu').innerText = guestName;
         if ($('rsvp-name') && guestName !== "Bapak/Ibu/Saudara/i") $('rsvp-name').value = guestName;
 
+        // ✅ URL PARAMETER ?admin=1 untuk buka admin langsung
+        if (urlParams.get('admin') === '1') {
+            setTimeout(function() { openPinModal(); }, 1000);
+        }
+
         buildGalleryUrlFields();
         var data = await fetchCloudData();
-
         if (data && Object.keys(data).length > 2) {
             var merged = JSON.parse(JSON.stringify(defaultData));
             for (var key in data) { if (key !== 'bukuTamu' && key !== 'banks') merged[key] = data[key]; }
@@ -1698,10 +1711,8 @@ body.pwa-installed #ios-install-hint { display: none !important; }
             try { var localStr = localStorage.getItem('undanganData_v2'); if (localStr) { data = JSON.parse(localStr); dataSource = 'local'; } else { data = null; } } catch (e) { data = null; }
         }
         if (!data) { data = JSON.parse(JSON.stringify(defaultData)); dataSource = 'default'; }
-
         applyDataToHTML(data);
         if (dataSource === 'cloud' || dataSource === 'default') { try { localStorage.setItem('undanganData_v2', JSON.stringify(data)); } catch (e) {} }
-
         initScrollNav();
         window.addEventListener('scroll', onScroll, { passive: true });
         updateScrollProgress();
@@ -1709,7 +1720,7 @@ body.pwa-installed #ios-install-hint { display: none !important; }
         $('awal').style.visibility = 'visible';
         AOS.refresh();
 
-        // ✅ Register Service Worker (DIPERBAIKI - RELATIVE PATH + SCOPE)
+        // ✅ Register Service Worker (RELATIVE PATH + SCOPE)
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./service-worker.js', { scope: './' })
                 .then(function(reg) {
@@ -1735,13 +1746,11 @@ body.pwa-installed #ios-install-hint { display: none !important; }
             
             navigator.serviceWorker.addEventListener('controllerchange', function() {
                 console.log('[PWA] New service worker controlling page');
-                window.location.reload();
             });
         } else {
             console.warn('[PWA] ⚠️ Service Worker not supported in this browser');
         }
 
-        // ✅ Cek iOS install hint
         checkIosInstall();
     }
 
