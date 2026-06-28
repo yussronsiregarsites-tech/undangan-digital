@@ -1105,7 +1105,7 @@ splitElements.forEach(function(el) {
 if (el.dataset.splitDone) return;
 var text = el.textContent.trim();
 var words = text.split(/\s+/);
-el.innerHTML = words.map(function(word) { return '<span class="word">' + word + '</span>'; }).join('');
+el.innerHTML = words.map(function(word) { return '<span class="word">' + word + '</span>'; }).join(' ');
 el.dataset.splitDone = 'true';
 });
 var splitObserver = new IntersectionObserver(function(entries) {
@@ -1148,7 +1148,6 @@ if (source === 'cloud') { el.className = 'sync-badge cloud'; el.innerHTML = '<i 
 else if (source === 'local') { el.className = 'sync-badge local'; el.innerHTML = '<i class="fa-solid fa-database"></i> Lokal'; }
 else { el.className = 'sync-badge offline'; el.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Default'; }
 }
-function normalizeDateString(d) { if (!d) return ""; if (d.indexOf('T') !== -1) { var dt = new Date(d); if (!isNaN(dt)) return dt.toISOString().split('T')[0]; } return d; }
 function escapeHtml(str) {
 if (!str) return '';
 return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -1172,7 +1171,7 @@ return null;
 
 // ✅ PIN MODAL FUNCTIONS
 window.openPinModal = function() {
-$('pin-modal').classList.add('active');
+ $('pin-modal').classList.add('active');
 document.body.style.overflow = 'hidden';
 setTimeout(function() {
 var firstInput = document.querySelector('.pin-input[data-pin-index="0"]');
@@ -1180,14 +1179,14 @@ if (firstInput) firstInput.focus();
 }, 300);
 };
 window.closePinModal = function() {
-$('pin-modal').classList.remove('active');
+ $('pin-modal').classList.remove('active');
 document.body.style.overflow = '';
 clearPinInputs();
 };
 function clearPinInputs() {
 var inputs = document.querySelectorAll('.pin-input');
 inputs.forEach(function(input) { input.value = ''; input.classList.remove('filled', 'error'); });
-$('pin-error').classList.add('hidden');
+ $('pin-error').classList.add('hidden');
 }
 document.querySelectorAll('.pin-input').forEach(function(input) {
 input.addEventListener('input', function(e) {
@@ -1239,7 +1238,7 @@ throw new Error(result.message || 'PIN salah');
 } catch (err) {
 console.warn('Verifikasi PIN gagal:', err);
 inputs.forEach(function(input) { input.classList.add('error'); });
-$('pin-error').classList.remove('hidden');
+ $('pin-error').classList.remove('hidden');
 showToast('PIN salah!', 'error');
 setTimeout(clearPinInputs, 1500);
 } finally {
@@ -1279,9 +1278,9 @@ clearTimeout(timeoutId);
 var result = await res.json();
 if (result.status === 'success') {
 ADMIN_PIN = newPin;
-$('set-oldPin').value = '';
-$('set-newPin').value = '';
-$('set-confirmPin').value = '';
+ $('set-oldPin').value = '';
+ $('set-newPin').value = '';
+ $('set-confirmPin').value = '';
 showToast('PIN berhasil diubah!', 'success');
 } else {
 throw new Error(result.message);
@@ -1306,7 +1305,7 @@ if (pendingUploadType === 'audio') {
 input.click();
 };
 
-$('file-upload-input').addEventListener('change', function(e) {
+ $('file-upload-input').addEventListener('change', function(e) {
 var file = e.target.files[0];
 if (!file || !pendingUploadField) return;
 
@@ -1354,7 +1353,7 @@ showToast('Upload gagal: ' + (result.message || 'Unknown error'), 'error');
 .catch(function(err) { showToast('Upload gagal: ' + err.message, 'error'); })
 .finally(function() {
 pendingUploadField = null; pendingUploadPreviewId = null; pendingUploadType = 'image';
-$('file-upload-input').value = '';
+ $('file-upload-input').value = '';
 });
 };
 reader.readAsDataURL(file);
@@ -1509,8 +1508,8 @@ setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('!bg-green-10
 
 function applyDataToHTML(data) {
 appData = data;
-$$('.val-pria-nick').forEach(function(el) { el.textContent = data.priaNick; });
-$$('.val-wanita-nick').forEach(function(el) { el.textContent = data.wanitaNick; });
+ $$('.val-pria-nick').forEach(function(el) { el.textContent = data.priaNick; });
+ $$('.val-wanita-nick').forEach(function(el) { el.textContent = data.wanitaNick; });
 if ($('val-pria-full')) $('val-pria-full').textContent = data.priaFull;
 if ($('val-wanita-full')) $('val-wanita-full').textContent = data.wanitaFull;
 if ($('val-pria-ortu')) $('val-pria-ortu').textContent = data.priaOrtu;
@@ -1578,7 +1577,11 @@ renderBankList();
 rsvpList = data.bukuTamu || [];
 renderRsvpList();
 document.title = 'Undangan ' + (data.priaNick || '') + ' & ' + (data.wanitaNick || '');
-startCountdown(normalizeDateString(data.countdownTarget));
+
+// ✅ PERBAIKAN COUNTDOWN: Menggunakan data.countdownTarget atau data.akadDate secara langsung
+// Untuk menghindari bug timezone yang sebelumnya menggeser tanggal karena toISOString()
+startCountdown(data.countdownTarget || data.akadDate);
+
 refreshAllPreviews(data);
 populateSettingsForm(data);
 }
@@ -1691,26 +1694,83 @@ if (e.key === 'Escape') closeLightbox();
 if (e.key === 'ArrowLeft') navLightbox(-1);
 if (e.key === 'ArrowRight') navLightbox(1);
 });
+
+// ✅ FUNGSI COUNTDOWN YANG SUDAH DIPERBAIKI SECARA MENYELURUH
 function startCountdown(target) {
-if (countdownInterval) clearInterval(countdownInterval);
-if (!target) return;
-var targetDate = new Date(target + 'T00:00:00');
-if (isNaN(targetDate.getTime())) return;
-function update() {
-var diff = targetDate.getTime() - Date.now();
-if (diff <= 0) { $('cd-days').textContent = '0'; $('cd-hours').textContent = '0'; $('cd-mins').textContent = '0'; $('cd-secs').textContent = '0'; clearInterval(countdownInterval); return; }
-$('cd-days').textContent = Math.floor(diff / 86400000);
-$('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-$('cd-mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-$('cd-secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    if (countdownInterval) clearInterval(countdownInterval);
+    if (!target) return;
+    
+    var targetDate = null;
+    
+    if (target instanceof Date) {
+        targetDate = target;
+    } else if (typeof target === 'string') {
+        // Jika format ISO dengan T (misal "2026-07-20T00:00:00")
+        if (target.indexOf('T') !== -1) {
+            targetDate = new Date(target);
+        } 
+        // Jika format YYYY-MM-DD (misal "2026-07-20")
+        else if (/^\d{4}-\d{2}-\d{2}$/.test(target)) {
+            var parts = target.split('-');
+            // Buat sebagai waktu lokal agar tidak terjadi pergeseran hari karena timezone UTC
+            targetDate = new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0, 0);
+        }
+        // Jika format tanggal Indonesia (misal "20 Juli 2026")
+        else {
+            var months = {
+                'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+                'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+            };
+            var tParts = target.toLowerCase().split(' ');
+            if (tParts.length === 3) {
+                var day = parseInt(tParts[0]);
+                var month = months[tParts[1]];
+                var year = parseInt(tParts[2]);
+                if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                    targetDate = new Date(year, month, day, 0, 0, 0, 0);
+                }
+            }
+        }
+    }
+    
+    // Fallback jika parser di atas gagal
+    if (!targetDate || isNaN(targetDate.getTime())) {
+        targetDate = new Date(target);
+    }
+    
+    if (isNaN(targetDate.getTime())) return;
+
+    function update() {
+        var diff = targetDate.getTime() - Date.now();
+        if (diff <= 0) { 
+            $('cd-days').textContent = '0'; 
+            $('cd-hours').textContent = '00'; 
+            $('cd-mins').textContent = '00'; 
+            $('cd-secs').textContent = '00'; 
+            clearInterval(countdownInterval); 
+            return; 
+        }
+        
+        var days = Math.floor(diff / 86400000);
+        var hours = Math.floor((diff % 86400000) / 3600000);
+        var mins = Math.floor((diff % 3600000) / 60000);
+        var secs = Math.floor((diff % 60000) / 1000);
+        
+        $('cd-days').textContent = days;
+        $('cd-hours').textContent = String(hours).padStart(2, '0');
+        $('cd-mins').textContent = String(mins).padStart(2, '0');
+        $('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+    
+    update(); 
+    countdownInterval = setInterval(update, 1000);
 }
-update(); countdownInterval = setInterval(update, 1000);
-}
+
 window.bukaUndangan = function() {
-$('awal').classList.add('opened');
-$('main-content').classList.remove('hidden');
-$('bottom-nav').classList.remove('hidden');
-$('audio-toggle').classList.remove('hidden');
+ $('awal').classList.add('opened');
+ $('main-content').classList.remove('hidden');
+ $('bottom-nav').classList.remove('hidden');
+ $('audio-toggle').classList.remove('hidden');
 var audio = $('bg-music');
 audio.volume = 0.35;
 if (!audio.src || audio.src === location.href) {
@@ -1774,8 +1834,8 @@ console.warn('Gagal kirim ke cloud:', err);
 rsvpList.unshift(localItem); renderRsvpList();
 showToast('Tersimpan lokal (offline)', 'info');
 }
-$('rsvp-message').value = ''; $('rsvp-status').value = ''; $('rsvp-jumlah').value = '1';
-$('jumlah-wrapper').classList.add('hidden');
+ $('rsvp-message').value = ''; $('rsvp-status').value = ''; $('rsvp-jumlah').value = '1';
+ $('jumlah-wrapper').classList.add('hidden');
 btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Ucapan';
 };
 function renderRsvpList() {
@@ -1789,7 +1849,7 @@ var kehadiran = item.kehadiran || item.status || '-';
 var ucapan = item.ucapan || item.message || '';
 var tanggal = item.tanggal || item.time || '';
 return '<div class="bg-gray-50 rounded-xl p-4 border border-gray-100" style="' + (i === 0 ? 'animation:fadeSlideIn 0.4s ease' : '') + '">' +
-'<div class="flex items-center justify-between mb-2"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center text-xs font-bold">' + escapeHtml(nama[0].toUpperCase()) + '</div>' +
+'<div class="flex items-center justify-between mb-2"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center text-xs font-bold">' + escapeHtml((nama[0] || '?').toUpperCase()) + '</div>' +
 '<span class="font-semibold text-sm text-gray-800">' + escapeHtml(nama) + '</span></div>' +
 '<span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ' + (kehadiran === 'Hadir' ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-500') + '">' + escapeHtml(kehadiran) + '</span></div>' +
 '<p class="text-sm text-gray-600 leading-relaxed pl-10">' + escapeHtml(ucapan) + '</p>' +
@@ -1816,11 +1876,11 @@ links.forEach(function(a) { a.classList.toggle('active', a.getAttribute('data-se
 window.openSettings = function() {
 if (!appData) return;
 populateSettingsForm(appData);
-$('settings-modal').classList.add('active');
+ $('settings-modal').classList.add('active');
 document.body.style.overflow = 'hidden';
 };
 window.closeSettings = function() {
-$('settings-modal').classList.remove('active');
+ $('settings-modal').classList.remove('active');
 document.body.style.overflow = '';
 };
 window.saveSettings = function() {
@@ -1905,7 +1965,7 @@ grid.appendChild(div);
 window.addEventListener('beforeinstallprompt', function(e) {
 e.preventDefault();
 deferredPrompt = e;
-$('pwa-install-btn').classList.add('show');
+ $('pwa-install-btn').classList.add('show');
 });
 window.installPWA = function() {
 if (deferredPrompt) {
@@ -1915,7 +1975,7 @@ if (choiceResult.outcome === 'accepted') {
 showToast('Aplikasi berhasil diinstall!', 'success');
 }
 deferredPrompt = null;
-$('pwa-install-btn').classList.remove('show');
+ $('pwa-install-btn').classList.remove('show');
 });
 } else {
 showToast('Buka di Chrome/Edge untuk install', 'info');
@@ -1952,8 +2012,8 @@ if (dataSource === 'cloud' || dataSource === 'default') { try { localStorage.set
 initScrollNav();
 window.addEventListener('scroll', onScroll, { passive: true });
 updateScrollProgress();
-$('main-loader').classList.add('fade-out');
-$('awal').style.visibility = 'visible';
+ $('main-loader').classList.add('fade-out');
+ $('awal').style.visibility = 'visible';
 AOS.refresh();
 // ✅ Register Service Worker (RELATIVE PATH!)
 if ('serviceWorker' in navigator) {
