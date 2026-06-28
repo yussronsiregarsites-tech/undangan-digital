@@ -268,112 +268,56 @@ transition: 0.3s ease; border: none; font-size: 18px;
     transform: scale(1.2);
     opacity: 0.7;
 }
+
+/* ✅ WHATSAPP PROMO - ELEGANT SEPARATOR (UPDATED) */
 .wa-promo-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(203, 166, 87, 0.2);
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(203, 166, 87, 0.15);
 }
-.wa-promo-title {
+.wa-promo-link {
     font-size: 11px;
     color: #6b7280;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-.wa-promo-btn {
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(37, 211, 102, 0.15);
-    color: #25D366;
-    padding: 10px 20px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
+    gap: 6px;
     transition: all 0.3s ease;
-    border: 1px solid rgba(37, 211, 102, 0.3);
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(203, 166, 87, 0.05);
+    border: 1px solid rgba(203, 166, 87, 0.1);
 }
-.wa-promo-btn:hover {
-    background: rgba(37, 211, 102, 0.25);
-    transform: scale(1.03);
+.wa-promo-link:hover {
+    color: var(--gold);
+    background: rgba(203, 166, 87, 0.1);
+    border-color: rgba(203, 166, 87, 0.25);
+    transform: translateY(-1px);
 }
-.wa-promo-btn i { font-size: 18px; }
-.wa-promo-phone {
-    font-size: 10px;
-    color: #9ca3af;
-    margin-top: 0.75rem;
-}
-.wa-promo-phone i { font-size: 10px; margin-right: 4px; }
-.decor-section-title {
-    font-size: 11px;
-    color: #374151;
-    font-weight: 700;
-    margin-bottom: 8px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #e5e7eb;
-}
-.decor-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-}
-@media (max-width: 640px) {
-    .decor-grid { grid-template-columns: 1fr; }
-}
-.decor-item {
-    background: #fafafa;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.decor-item .decor-preview {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid var(--gold-pale);
-    background: #f3f4f6;
-    display: flex;
+.wa-promo-link .wa-icon-wrap {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.1);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
-.decor-item .decor-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.wa-promo-link:hover .wa-icon-wrap {
+    background: rgba(37, 211, 102, 0.15);
 }
-.decor-item .decor-preview .no-image {
-    font-size: 16px;
-    color: #ccc;
-}
-.decor-item .decor-info {
-    flex: 1;
-    min-width: 0;
-}
-.decor-item .decor-label {
+.wa-promo-link .wa-icon-wrap i {
+    color: #25D366;
     font-size: 10px;
-    color: #6b7280;
-    margin-bottom: 2px;
 }
-.decor-item .decor-btn {
-    background: var(--gold-mid);
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: 0.2s;
-    flex-shrink: 0;
+.wa-promo-link .ext-icon {
+    font-size: 9px;
+    opacity: 0.5;
+    transition: opacity 0.3s;
 }
-.decor-item .decor-btn:hover {
-    background: var(--gold);
+.wa-promo-link:hover .ext-icon {
+    opacity: 0.8;
 }
 
 /* ✅ SKELETON LOADING */
@@ -848,20 +792,25 @@ transition: 0.3s ease; border: none; font-size: 18px;
 
 <p class="text-xs text-gray-400 mt-4">Made with <span id="footer-heart" class="footer-heart text-red-400 px-0.5 text-base" aria-label="Tap 5x untuk admin">❤️</span> for <span class="val-pria-nick"></span> & <span class="val-wanita-nick"></span></p>
 
-<div class="wa-promo-section" data-aos="reveal-up" data-aos-delay="200">
-    <p class="wa-promo-title">Butuh Undangan Digital Seperti Ini?</p>
-    <a href="https://wa.me/6285123569250?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20undangan%20digital" 
+<!-- ✅ WHATSAPP PROMO - ELEGANT SEPARATOR (OPSI 4) -->
+<div class="wa-promo-section text-center" data-aos="reveal-up" data-aos-delay="200">
+    <div class="flex items-center justify-center gap-3 mb-3">
+        <div class="h-px w-12 bg-gradient-to-r from-transparent to-gray-300"></div>
+        <i class="fa-brands fa-whatsapp text-green-500/60 text-sm"></i>
+        <div class="h-px w-12 bg-gradient-to-l from-transparent to-gray-300"></div>
+    </div>
+    <a href="https://wa.me/6285123569250?text=Halo%2C%20saya%20tertarik%20dengan%20undangan%20digital" 
        target="_blank" 
        rel="noopener noreferrer"
-       class="wa-promo-btn">
-        <i class="fa-brands fa-whatsapp"></i>
-        <span>Hubungi via WhatsApp</span>
+       class="wa-promo-link">
+        <span class="wa-icon-wrap">
+            <i class="fa-brands fa-whatsapp"></i>
+        </span>
+        <span>Custom undangan digital</span>
+        <i class="fa-solid fa-arrow-up-right-from-square ext-icon"></i>
     </a>
-    <p class="wa-promo-phone">
-        <i class="fa-solid fa-phone"></i>
-        0851-2356-9250
-    </p>
 </div>
+
 </div>
 <img id="orn-footer-bl" src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKR.webp" class="ornament ornament-bl opacity-40 parallax-layer" data-parallax-speed="0.1" alt="" loading="lazy">
 <img id="orn-footer-br" src="https://indoinvite.com/nikah/template/elegan/elegan-gold/EG-BKN2.webp" class="ornament ornament-br opacity-40 parallax-layer" data-parallax-speed="-0.1" alt="" loading="lazy">
@@ -1185,8 +1134,6 @@ var GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzOxZd0ppHMqv8mimg
 var GALLERY_COUNT = 6;
 var FETCH_TIMEOUT = 10000;
 var ADMIN_PIN = null;
-
-// ✅ PAGINATION CONFIG
 var RSVP_PER_PAGE = 15;
 var rsvpCurrentPage = 1;
 var rsvpFiltered = [];
@@ -1310,7 +1257,6 @@ var confirmCallback = null;
 var $ = function(id) { return document.getElementById(id); };
 var $$ = function(sel) { return document.querySelectorAll(sel); };
 
-// ✅ CHARACTER COUNTER
 window.updateCharCounter = function(textarea) {
     var counter = $('char-counter');
     if (!counter) return;
@@ -1322,7 +1268,6 @@ window.updateCharCounter = function(textarea) {
     else if (len > max * 0.7) counter.classList.add('warning');
 };
 
-// ✅ SHARE FUNCTION
 window.shareUndangan = async function() {
     var shareData = {
         title: 'Undangan Pernikahan ' + (appData ? appData.priaNick : '') + ' & ' + (appData ? appData.wanitaNick : ''),
@@ -1358,7 +1303,6 @@ function copyToClipboard(text) {
     });
 }
 
-// ✅ CUSTOM CONFIRM MODAL
 window.showConfirm = function(title, message, callback, type) {
     type = type || 'warning';
     var icon = $('confirm-icon');
@@ -1399,7 +1343,6 @@ window.confirmResetDecor = function() {
     );
 };
 
-// ✅ UPLOAD PROGRESS
 function showUploadProgress() {
     var el = $('upload-progress');
     if (el) el.classList.add('show');
@@ -1418,7 +1361,6 @@ function hideUploadProgress() {
     if (el) el.classList.remove('show');
 }
 
-// ✅ IMAGE COMPRESSION
 function compressImage(file, maxWidth, maxHeight, quality) {
     return new Promise(function(resolve) {
         var reader = new FileReader();
@@ -2638,7 +2580,6 @@ window.toggleJumlah = function(val) {
     }
 };
 
-// ✅ SKELETON LOADING
 function showSkeletonLoading() {
     var container = $('rsvp-list-container');
     if (!container) return;
@@ -2657,7 +2598,6 @@ function showSkeletonLoading() {
     container.innerHTML = html;
 }
 
-// ✅ FILTER RSVP LIST
 window.filterRsvpList = function() {
     var searchInput = $('rsvp-search');
     var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -2676,7 +2616,6 @@ window.filterRsvpList = function() {
     renderRsvpList();
 };
 
-// ✅ LOAD MORE RSVP
 window.loadMoreRsvp = function() {
     rsvpCurrentPage++;
     renderRsvpList(false);
